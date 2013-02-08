@@ -12,7 +12,7 @@ Control::Control () {
 }
 
 void Control::readin() {
-	std::cout << "We need to work in this." << std::endl;
+	cout << "We need to work in this." << endl;
 }
 
 void Control::run() {
@@ -21,15 +21,15 @@ void Control::run() {
 	int success = SDL_Init(SDL_INIT_VIDEO);
 	isrunning = (success==0);
 	if (isrunning) {
-	  std::cout << "Initialized" << std::endl;
+	  cout << "Initialized" << endl;
 	  // Must quit when done using SDL, else resources are not deallocated
 	  // MEMRAH REAKS!!
 	  SDL_Quit();
 	}
 	else 
-	  std::cout << "Didnt work, LURK MOAR" << std::endl;
+	  cout << "Didnt work, LURK MOAR" << endl;
 	
-	std::cout << "This is where the program would run." << std::endl;
+	cout << "This is where the program would run." << endl;
 }
 
 // Okay one last note...I couldn't get this to compile on my machine
