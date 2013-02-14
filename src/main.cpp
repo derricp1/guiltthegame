@@ -3,6 +3,7 @@
 int main (void) 
 {
 	Control yup;
-	yup.readin();
+	yup.setup();
 	yup.run();
+	yup.quit();
 }

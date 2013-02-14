@@ -7,4 +7,5 @@ OBJECTS = Control.o
 $(P): $(OBJECTS)
 
 
-
+clean:
+	rm -rf *.o main ../*/*~
