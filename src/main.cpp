@@ -7,7 +7,7 @@ int main (void)
 	bool run = true;
 	Control yup;
 	
-	yup.setup();
+	yup.setup(NULL);
 	if (yup.isRunning())
 		yup.run();
 	else

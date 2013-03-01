@@ -14,7 +14,7 @@ class Player
 	public:
 		Player(int=300, int=300, SDL_Color* =NULL);
 		Player(const Player&);
-		//~Player();
+		~Player();
 		Player& operator= (const Player&);
 		
 		void moveup();

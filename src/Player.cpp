@@ -3,6 +3,7 @@
 
 Player::Player(int x, int y, SDL_Color *initCol)
 {
+	shape = new SDL_Rect;
 	shape->x = x;
 	shape->y = y;
 	shape->h = 100;
@@ -10,6 +11,7 @@ Player::Player(int x, int y, SDL_Color *initCol)
 	
 	if (!initCol)
 	{
+		color = new SDL_Color;
 		color->r = 150;
 		color->g = 150;
 		color->b = 150;
@@ -21,14 +23,23 @@ Player::Player(int x, int y, SDL_Color *initCol)
 
 Player::Player(const Player& rhs)
 {
+	shape = new SDL_Rect;
 	shape->x = rhs.shape->x;
 	shape->y = rhs.shape->x;
 	shape->h = rhs.shape->h;
 	shape->w = rhs.shape->w;
 	
+	color = new SDL_Color;
 	color->r = rhs.color->r;
 	color->g = rhs.color->g;
 	color->b = rhs.color->b;
+}
+
+
+Player::~Player()
+{
+	delete shape;
+	delete color;
 }
 
 

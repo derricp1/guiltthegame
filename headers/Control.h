@@ -18,15 +18,14 @@ class Control {
 		int winWidth, winHeight;
 		SDL_Color *background;
 		SDL_Surface *screen;
-		Player player;
-		SDL_Event event;
+		Player *player;
 	
 	public:
 		Control(int=DEFWINSIZE, int=DEFWINSIZE);
 		~Control();
 		
 		bool isRunning();
-		void setup(SDL_Color* =NULL);
+		void setup(SDL_Color*);
 		void run();
 		void quit();
 	
