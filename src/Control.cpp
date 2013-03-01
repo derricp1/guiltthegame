@@ -11,7 +11,7 @@ Control::Control (int width, int height) {
 Control::~Control() {
 	if (background!=NULL)
 		delete background;
-	if (SDL_WasInit(SDL_INIT_VIDEO)!=0)
+	if (SDL_WasInit(SDL_INIT_VIDEO))
 		SDL_Quit();
 }
 
@@ -54,7 +54,7 @@ void Control::setup(SDL_Color* bkgrnd) {
 		}
 	}
 	
-	if (bkgrnd==NULL) {
+	if (!bkgrnd) {
 		background = new SDL_Color;
 		background->r = RGBMAX;
 		background->g = RGBMAX;
@@ -66,12 +66,59 @@ void Control::setup(SDL_Color* bkgrnd) {
 		SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 
 					background->r, background->g, background->b));
 		SDL_UpdateRect(screen, 0,0,0,0);
+		SDL_Color *playCol = player.getColor();
+		SDL_FillRect(screen, player.getShape(), player.mapColor(screen));
+		SDL_UpdateRects(screen, 1, player.getShape());
 	}
 }
 
 
 void Control::run() {
-	cout << "This is where the program would run." << endl;
+	char term = 'x';
+	
+	while (running) {							// UPDAIT LOP
+		while (SDL_PollEvent(&event)) {
+			// POLLING FOR EVENTS: must be done in loop or it wont work
+			
+			// Render white background
+			SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format,
+						background->r, background->g, background->b));
+			SDL_UpdateRect(screen, 0,0,0,0);
+			
+			if (event.type==SDL_KEYDOWN) {
+				char *mench = SDL_GetKeyName(event.key.keysym.sym);
+				term = mench[0];
+				
+				switch(term) {
+					case 'q':
+						running = false;
+						break;
+						
+						// Change current position of object with wasd. Will be updated on next render
+					case 'w':
+						player.moveup();
+						break;
+					case 'a':
+						player.moveleft();
+						break;
+					case 's':
+						player.movedown();
+						break;
+					case 'd':
+						player.moveright();
+						break;
+					default:
+						cout << "You pressed: ";
+						cout << mench << endl;
+						break;
+				}
+				
+				// Render visual object at current position
+				SDL_FillRect(screen, player.getShape(), player.mapColor(screen));
+				SDL_UpdateRects(screen, 1, player.getShape());
+			}
+		}
+	}
 }
 
 

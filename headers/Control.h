@@ -2,6 +2,7 @@
 #define CONTROL_H
 #include <iostream>
 #include "SDL/SDL.h"
+#include "Player.h"
 using namespace std;
 
 const int DEFWINSIZE=700, RGBMAX=255;
@@ -17,6 +18,8 @@ class Control {
 		int winWidth, winHeight;
 		SDL_Color *background;
 		SDL_Surface *screen;
+		Player player;
+		SDL_Event event;
 	
 	public:
 		Control(int=DEFWINSIZE, int=DEFWINSIZE);
