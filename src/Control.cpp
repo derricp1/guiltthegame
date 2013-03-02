@@ -5,6 +5,7 @@ Control::Control (int width, int height) {
 	winWidth = width;
 	winHeight = height;
 	screen = NULL;
+	player = new Player();
 }
 
 
@@ -27,8 +28,7 @@ void Control::setup(SDL_Color* bkgrnd) {
 	int success;
 	success = SDL_Init(SDL_INIT_VIDEO);
 	running = (success==0);
-	cout << success << endl;
-	player = new Player();
+	
 	if (!running)
 		cout << "ERROR: Initialization failed!" << endl;
 	else {
@@ -82,11 +82,6 @@ void Control::run() {
 		while (SDL_PollEvent(&event)) {
 			// POLLING FOR EVENTS: must be done in loop or it wont work
 			
-			// Render white background
-			SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format,
-						background->r, background->g, background->b));
-			SDL_UpdateRect(screen, 0,0,0,0);
-			
 			if (event.type==SDL_KEYDOWN) {
 				char *mench = SDL_GetKeyName(event.key.keysym.sym);
 				term = mench[0];
@@ -98,22 +93,26 @@ void Control::run() {
 						
 						// Change current position of object with wasd. Will be updated on next render
 					case 'w':
-						player->moveup();
+						player->moveup(0);
 						break;
 					case 'a':
-						player->moveleft();
+						player->moveleft(0);
 						break;
 					case 's':
-						player->movedown();
+						player->movedown(winHeight);
 						break;
 					case 'd':
-						player->moveright();
+						player->moveright(winWidth);
 						break;
 					default:
-						cout << "You pressed: ";
-						cout << mench << endl;
+						cout << "You pressed: " << mench << endl;
 						break;
 				}
+				
+				// Render white background
+				SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format,
+							background->r, background->g, background->b));
+				SDL_UpdateRect(screen, 0,0,0,0);
 				
 				// Render visual object at current position
 				SDL_FillRect(screen, player->getShape(), player->mapColor(screen));

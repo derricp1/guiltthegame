@@ -63,31 +63,51 @@ Player& Player::operator= (const Player& rhs)
 }
 
 
-void Player::moveup()
+void Player::moveup(int bound)
 {
-	shape->y -= moveFactor;
-	cout << "moved up" << endl;
+	if (shape->y > bound)
+	{
+		shape->y -= moveFactor;
+		cout << "moved up" << endl;
+	}
+	else 
+		cout << "Cannot move up; bounds reached" << endl;
 }
 
 
-void Player::movedown()
+void Player::movedown(int bound)
 {
-	shape->y += moveFactor;
-	cout << "moved down" << endl;
+	if (shape->y + shape->h < bound)
+	{
+		shape->y += moveFactor;
+		cout << "moved down" << endl;
+	}
+	else
+		cout << "Cannot move down; bounds reached" << endl;
 }
 
 
-void Player::moveleft()
+void Player::moveleft(int bound)
 {
-	shape->x -= moveFactor;
-	cout << "Moved left" << endl;
+	if (shape->x > bound)
+	{
+		shape->x -= moveFactor;
+		cout << "Moved left" << endl;
+	}
+	else
+		cout << "Cannot move left; bounds reached" << endl;
 }
 
 
-void Player::moveright()
+void Player::moveright(int bound)
 {
-	shape->x += moveFactor;
-	cout << "Moved right" << endl;
+	if (shape->x + shape->w < bound)
+	{
+		shape->x += moveFactor;
+		cout << "Moved right" << endl;
+	}
+	else
+		cout << "Cannot move right; bounds reached" << endl;
 }
 
 

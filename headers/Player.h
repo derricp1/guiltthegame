@@ -17,10 +17,10 @@ class Player
 		~Player();
 		Player& operator= (const Player&);
 		
-		void moveup();
-		void movedown();
-		void moveleft();
-		void moveright();
+		void moveup(int);
+		void movedown(int);
+		void moveleft(int);
+		void moveright(int);
 		SDL_Rect* getShape() const;
 		SDL_Color* getColor() const;
 		Uint32 mapColor(SDL_Surface*) const;
