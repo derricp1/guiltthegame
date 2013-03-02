@@ -6,6 +6,8 @@ CC = gcc
 OBJECTS = Control.o Player.o
 $(P): $(OBJECTS)
 
+run: $(P)
+	./main
 
 clean:
 	rm -rf *.o main ../*/*~ ../guilt.tar
